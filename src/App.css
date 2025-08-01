@@ -1,7 +1,7 @@
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: var(--spacing-lg);
   text-align: center;
 }
 
@@ -36,9 +36,62 @@
 }
 
 .card {
-  padding: 2em;
+  padding: var(--spacing-lg);
 }
 
 .read-the-docs {
   color: #888;
+}
+
+/* Responsive breakpoints */
+@media (max-width: 1200px) {
+  #root {
+    max-width: 100%;
+    padding: var(--spacing-md);
+  }
+}
+
+@media (max-width: 768px) {
+  #root {
+    padding: var(--spacing-sm);
+  }
+  
+  .logo {
+    height: 4em;
+    padding: 1em;
+  }
+  
+  .card {
+    padding: var(--spacing-md);
+  }
+}
+
+@media (max-width: 480px) {
+  #root {
+    padding: var(--spacing-xs);
+  }
+  
+  .logo {
+    height: 3em;
+    padding: 0.75em;
+  }
+  
+  .card {
+    padding: var(--spacing-sm);
+  }
+}
+
+@media (max-width: 370px) {
+  #root {
+    padding: var(--spacing-xs);
+  }
+  
+  .logo {
+    height: 2.5em;
+    padding: 0.5em;
+  }
+  
+  .card {
+    padding: var(--spacing-xs);
+  }
 }
