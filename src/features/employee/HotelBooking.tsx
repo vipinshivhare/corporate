@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { fetchHotels, createBooking } from "../../store/slices/bookingSlice";
-import { useNavigate } from "react-router-dom";
+import { fetchHotels } from "../../store/slices/bookingSlice";
 import HamburgerMenu from "../../components/HamburgerMenu";
 import SearchSuggestions from "../../components/SearchSuggestions";
 import { convertCurrency, formatCurrency } from "../../utils/currencyUtils";
@@ -9,9 +8,8 @@ import { Hotel, Search, Calendar, MapPin, Star, Users } from "lucide-react";
 import "../../styles/EmployeeDashboard.css";
 
 const HotelBooking: React.FC = () => {
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { user } = useAppSelector(state => state.auth);
+  // const { user } = useAppSelector(state => state.auth);
   const { hotels, loading } = useAppSelector(state => state.booking);
   const { currentCurrency, exchangeRate } = useAppSelector(state => state.currency);
 
@@ -79,36 +77,8 @@ const HotelBooking: React.FC = () => {
     setShowSuggestions(false);
   };
 
-  const handleBookHotel = async (hotel: any) => {
-    if (!user?.id) return;
-
-    const nights = Math.ceil((new Date(searchForm.checkOut).getTime() - new Date(searchForm.checkIn).getTime()) / (1000 * 60 * 60 * 24));
-    const totalAmount = hotel.pricePerNight * nights * searchForm.rooms;
-
-    const bookingData = {
-      employeeId: user.id,
-      type: 'hotel',
-      city: hotel.city,
-      date: searchForm.checkIn,
-      amount: totalAmount,
-      status: 'confirmed',
-      bookingDetails: {
-        hotelName: hotel.name,
-        address: hotel.address,
-        checkIn: searchForm.checkIn,
-        checkOut: searchForm.checkOut,
-        guests: searchForm.guests,
-        rooms: searchForm.rooms,
-        nights: nights,
-        amenities: hotel.amenities
-      }
-    };
-
-    // const result = await dispatch(createBooking(bookigData));
-    // if (createBooking.fulfilled.match(result)) {
-    //   alert(`Hotel booked successfully! Booking ID: ${result.payload.id}`);
-    //   navigate("/employee/dashboard");
-    // }
+  const handleBookHotel = async () => {
+    // Function currently does nothing; removed unused parameters and variables to fix TS errors
   };
 
   const renderStars = (rating: number) => {
@@ -269,7 +239,7 @@ const HotelBooking: React.FC = () => {
                         <span className="availability">Available</span>
                       </div>
                       <button
-                        onClick={() => handleBookHotel(hotel)}
+                        onClick={handleBookHotel}
                         className="book-button"
                         disabled={!searchForm.checkIn || !searchForm.checkOut}
                       >

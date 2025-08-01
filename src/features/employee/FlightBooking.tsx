@@ -88,25 +88,10 @@ const FlightBooking: React.FC = () => {
     setActiveField(null);
   };
 
-  const handleBookFlight = async (flight: any) => {
+  const handleBookFlight = async () => {
     if (!user?.id) return;
 
-    const bookingData = {
-      employeeId: user.id,
-      type: 'flight',
-      from: flight.from,
-      to: flight.to,
-      date: flight.date,
-      amount: flight.price * searchForm.passengers,
-      status: 'confirmed',
-      bookingDetails: {
-        airline: flight.airline,
-        flightNumber: flight.flightNumber,
-        departureTime: flight.departureTime,
-        arrivalTime: flight.arrivalTime,
-        passengers: searchForm.passengers
-      }
-    };
+    // bookingData removed to fix unused variable error
 
     // const result = await dispatch(createBooking(bookingData));
     // if (createBooking.fulfilled.match(result)) {
@@ -264,7 +249,7 @@ const FlightBooking: React.FC = () => {
                         <span className="availability">Available</span>
                       </div>
                       <button
-                        onClick={() => handleBookFlight(flight)}
+                        onClick={handleBookFlight}
                         className="book-button"
                         disabled={!searchForm.from || !searchForm.to || !searchForm.date}
                       >

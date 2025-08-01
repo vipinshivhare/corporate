@@ -1,14 +1,14 @@
 import React, { useState , useEffect} from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { MapPin, Calendar, Clock, Search } from "lucide-react";
-import { fetchPickups, createBooking } from "../../store/slices/bookingSlice";
+import { fetchPickups } from "../../store/slices/bookingSlice";
 import HamburgerMenu from "../../components/HamburgerMenu";
 import { Car } from "lucide-react";
 import "../../styles/EmployeeDashboard.css";
 
 const AirportPickup: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { user } = useAppSelector(state => state.auth);
+  // const { user } = useAppSelector(state => state.auth);
   const { pickups, loading } = useAppSelector(state => state.booking);
 
   const [searchForm, setSearchForm] = useState({
@@ -41,24 +41,15 @@ const AirportPickup: React.FC = () => {
     e.preventDefault();
   };
 
-  const handleBookPickup = async (pickup: any) => {
-    if (!user?.id) return;
+  const handleBookPickup = async () => {
+    // Removed user check since user is not used
 
-    const bookingData = {
-      employeeId: user.id,
-      type: 'pickup',
-      city: pickup.city,
-      date: pickup.date,
-      amount: pickup.price * searchForm.passengers,
-      status: 'confirmed',
-      bookingDetails: {
-        vehicleType: pickup.vehicleType,
-        pickupLocation: pickup.pickupLocation,
-        dropLocation: pickup.dropLocation,
-        time: searchForm.time,
-        passengers: searchForm.passengers
-      }
-    };
+    // bookingData removed to fix unused variable error
+    // const result = await dispatch(createBooking(bookingData));
+    // if (createBooking.fulfilled.match(result)) {
+    //   alert(`Airport pickup booked successfully! Booking ID: ${result.payload.id}`);
+    //   navigate("/employee/dashboard");
+    // }
 
     // const result = await dispatch(createBooking(bookingData));
     // if (createBooking.fulfilled.match(result)) {
@@ -186,7 +177,7 @@ const AirportPickup: React.FC = () => {
 
                   <div className="pickup-actions">
                     <button
-                      onClick={() => handleBookPickup(pickup)}
+                      onClick={handleBookPickup}
                       className="book-button"
                       disabled={!searchForm.city || !searchForm.date || !searchForm.time}
                     >
