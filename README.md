@@ -31,7 +31,7 @@ A comprehensive React + TypeScript frontend application for managing corporate t
 - **Forms**: React Hook Form + Yup validation
 - **API Calls**: Axios
 - **Routing**: React Router DOM v6+
-- **Mock APIs**: JSON Server
+- **External API**: Corporate Travel API (https://corporate-travel-api.onrender.com/data)
 - **Charts**: Recharts
 
 ##  Installation
@@ -47,12 +47,7 @@ A comprehensive React + TypeScript frontend application for managing corporate t
    npm install
    ```
 
-3. **Start the mock API server**
-   ```bash
-   npm run server
-   ```
-
-4. **Start the development server**
+3. **Start the development server**
    ```bash
    npm run dev
    ```
@@ -111,26 +106,23 @@ The application is ready for deployment on:
 - Netlify
 - Any static hosting service
 
-##  API Endpoints
+##  API Integration
 
-The application uses JSON Server with the following endpoints:
-- `GET /users` - User authentication
-- `GET /employees` - Employee data
-- `GET /expenses` - Expense management
-- `GET /bookings` - Booking history
-- `GET /flights` - Flight search
-- `GET /hotels` - Hotel search
-- `GET /pickups` - Pickup services
+The application fetches data from the external Corporate Travel API:
+- **Base URL**: https://corporate-travel-api.onrender.com/data
+- **Data Types**: Users, Employees, Expenses, Bookings, Flights, Hotels, Pickups
+- **Caching**: 5-minute cache to optimize performance
+- **Read-only**: The API is read-only, so new bookings/expenses are simulated locally
 
 ##  Development
 
 ### Available Scripts
 - `npm run dev` - Start development server
 - `npm run build` - Build for production
-- `npm run server` - Start mock API server
 - `npm run lint` - Run ESLint
 - `npm run preview` - Preview production build
 
 ##  License
 
 This project is created for educational purposes and demonstrates modern React development practices.
+# Corporate-Travel-System
