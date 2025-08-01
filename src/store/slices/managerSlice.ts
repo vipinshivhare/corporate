@@ -13,14 +13,14 @@ interface Employee {
 }
 
 interface Expense {
-  id: string;
-  employeeId: string;
-  employeeName: string;
-  description: string;
-  amount: number;
-  category: string;
+  id: number;
+  employeeId: number;
   date: string;
+  description: string;
+  category: string;
+  amount: number;
   status: 'pending' | 'approved' | 'rejected';
+  receipt?: string;
 }
 
 interface ManagerState {
@@ -80,14 +80,13 @@ export const updateEmployeeBudget = createAsyncThunk(
 
 export const updateExpenseStatus = createAsyncThunk(
   'manager/updateExpenseStatus',
-  async ({ id, status }: { id: string; status: 'approved' | 'rejected' }) => {
+  async ({ id, status }: { id: number; status: 'approved' | 'rejected' }) => {
     // Since external API is read-only, we'll return a mock updated expense
     const mockUpdatedExpense = {
       id,
       status,
       // Add other required fields with mock data
-      employeeId: '1',
-      employeeName: 'Updated Employee',
+      employeeId: 1,
       description: 'Updated expense',
       amount: 0,
       category: 'General',
@@ -106,8 +105,8 @@ export const fetchManagerStats = createAsyncThunk(
     ]);
     
     const totalTeamBudget = employees.reduce((sum: number, emp: Employee) => sum + emp.budget, 0);
-    const totalExpenses = expenses.reduce((sum: number, exp: any) => sum + exp.amount, 0);
-    const pendingApprovals = expenses.filter((exp: any) => exp.status === 'pending').length;
+    const totalExpenses = expenses.reduce((sum: number, exp: Expense) => sum + exp.amount, 0);
+    const pendingApprovals = expenses.filter((exp: Expense) => exp.status === 'pending').length;
     
     return {
       employees,

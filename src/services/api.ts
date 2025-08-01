@@ -2,14 +2,97 @@ import axios from 'axios';
 
 const API_BASE_URL = 'https://corporate-travel-api.onrender.com/data';
 
+interface User {
+  id: number;
+  email: string;
+  name: string;
+  role: 'employee' | 'manager';
+  password: string;
+  department?: string;
+  budget?: number;
+  walletBalance?: number;
+  rewardPoints?: number;
+}
+
+interface Employee {
+  id: number;
+  name: string;
+  email: string;
+  department: string;
+  budget: number;
+  usedBudget: number;
+  walletBalance: number;
+  rewardPoints: number;
+}
+
+interface Expense {
+  id: number;
+  employeeId: number;
+  date: string;
+  description: string;
+  category: string;
+  amount: number;
+  status: 'pending' | 'approved' | 'rejected';
+  receipt?: string;
+}
+
+interface Booking {
+  id: number;
+  employeeId: number;
+  type: 'flight' | 'hotel' | 'pickup';
+  from?: string;
+  to?: string;
+  city?: string;
+  date?: string;
+  checkIn?: string;
+  checkOut?: string;
+  amount: number;
+  status: 'confirmed' | 'cancelled' | 'pending';
+  bookingDetails: Record<string, unknown>;
+}
+
+interface Flight {
+  id: number;
+  from: string;
+  to: string;
+  date: string;
+  airline: string;
+  flightNumber: string;
+  departureTime: string;
+  arrivalTime: string;
+  price: number;
+  available: boolean;
+}
+
+interface Hotel {
+  id: number;
+  name: string;
+  city: string;
+  address: string;
+  rating: number;
+  pricePerNight: number;
+  available: boolean;
+  amenities: string[];
+}
+
+interface Pickup {
+  id: number;
+  city: string;
+  pickupLocation: string;
+  dropLocation: string;
+  vehicleType: string;
+  price: number;
+  available: boolean;
+}
+
 interface ApiData {
-  users: any[];
-  employees: any[];
-  expenses: any[];
-  bookings: any[];
-  flights: any[];
-  hotels: any[];
-  pickups: any[];
+  users: User[];
+  employees: Employee[];
+  expenses: Expense[];
+  bookings: Booking[];
+  flights: Flight[];
+  hotels: Hotel[];
+  pickups: Pickup[];
 }
 
 // Cache the API data to avoid multiple requests
@@ -22,14 +105,14 @@ const fetchApiData = async (): Promise<ApiData> => {
   
   // Return cached data if it's still valid
   if (cachedData && (now - lastFetchTime) < CACHE_DURATION) {
-    return cachedData;
+    return cachedData!;
   }
   
   try {
     const response = await axios.get(API_BASE_URL);
     cachedData = response.data;
     lastFetchTime = now;
-    return cachedData;
+    return cachedData!;
   } catch (error) {
     console.error('Failed to fetch API data:', error);
     throw error;

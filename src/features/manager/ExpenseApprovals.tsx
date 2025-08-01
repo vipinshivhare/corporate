@@ -19,11 +19,11 @@ const ExpenseApprovals: React.FC = () => {
     dispatch(fetchExpenses());
   }, [dispatch]);
 
-  const handleStatusUpdate = async (expenseId: string, status: 'approved' | 'rejected') => {
+  const handleStatusUpdate = async (expenseId: number, status: 'approved' | 'rejected') => {
     try {
       await dispatch(updateExpenseStatus({ id: expenseId, status }));
       alert(`Expense ${status} successfully!`);
-    } catch (error) {
+    } catch {
       alert('Failed to update expense status. Please try again.');
     }
   };
@@ -143,7 +143,7 @@ const ExpenseApprovals: React.FC = () => {
                   <div className="expense-header">
                     <div className="expense-info">
                       <h3>{expense.description}</h3>
-                      <p>By: {expense.employeeName}</p>
+                      <p>Employee ID: {expense.employeeId}</p>
                       <span className={`status ${expense.status}`}>
                         {expense.status}
                       </span>

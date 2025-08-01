@@ -146,7 +146,10 @@ const ManagerDashboard: React.FC = () => {
                     </div>
                     <div className="booking-details">
                       <h4>{expense.description}</h4>
-                      <p>By: {expense.employeeName}</p>
+                      <p>Amount: {formatCurrency(
+                        convertCurrency(expense.amount, 'INR', currentCurrency, exchangeRate),
+                        currentCurrency
+                      )}</p>
                       <span className={`status ${expense.status}`}>
                         {expense.status}
                       </span>

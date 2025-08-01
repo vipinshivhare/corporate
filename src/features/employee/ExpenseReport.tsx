@@ -61,7 +61,7 @@ const ExpenseReport: React.FC = () => {
       setReceiptPreview(null);
       
       alert('Expense submitted successfully!');
-    } catch (error) {
+    } catch {
       alert('Failed to submit expense. Please try again.');
     } finally {
       setIsSubmitting(false);

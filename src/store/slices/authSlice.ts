@@ -58,7 +58,7 @@ export const login = createAsyncThunk(
       const token = `token_${user.id}_${Date.now()}`;
       
       return { user, token };
-    } catch (error) {
+    } catch {
       return rejectWithValue('Login failed');
     }
   }
