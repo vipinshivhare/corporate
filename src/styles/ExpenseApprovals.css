@@ -1,0 +1,254 @@
+/* General layout */
+.employee-dashboard {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 1rem 2rem;
+  background-color: #f9fafb;
+  min-height: 100vh;
+}
+
+.dashboard-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.dashboard-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, rgba(102, 126, 234, 0.3) 0%, rgba(118, 75, 162, 0.3) 100%);
+  z-index: -1;
+}
+
+.dashboard-header h1 {
+  font-size: 3rem;
+  font-weight: 900;
+  margin: 0;
+  color: white;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.back-button {
+  background-color: #e5e7eb;
+  border: none;
+  padding: 0.4rem 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #374151;
+  font-size: 0.9rem;
+}
+
+.back-button:hover {
+  background-color: #d1d5db;
+}
+
+/* Stats Section */
+.approval-stats {
+  margin-top: 1rem;
+}
+
+.stats-grid {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.stat-card {
+  background: white;
+  padding: 1rem;
+  border-radius: 10px;
+  flex: 1;
+  min-width: 200px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.stat-icon {
+  color: #6b7280;
+}
+
+.stat-content h3 {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #374151;
+}
+
+.stat-value {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #111827;
+}
+
+/* Filters */
+.filters-section {
+  margin: 2rem 0 1rem;
+}
+
+.filter-controls {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+}
+
+.filter-group label {
+  margin-bottom: 0.3rem;
+  color: #374151;
+}
+
+.filter-group select {
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  font-size: 0.9rem;
+  background-color: #fff;
+}
+
+/* Expense Cards */
+.expense-list {
+  margin-top: 1.5rem;
+}
+
+.expense-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.expense-card {
+  background: white;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.expense-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.expense-info h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.expense-info p {
+  margin: 0.2rem 0;
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.status {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 5px;
+  text-transform: capitalize;
+  font-weight: 500;
+}
+
+.status.pending {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.status.approved {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+.status.rejected {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.expense-amount .amount {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #1f2937;
+}
+
+.expense-details {
+  margin-top: 0.75rem;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #4b5563;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+/* Buttons */
+.expense-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.approve-btn, .reject-btn {
+  flex: 1;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  color: white;
+}
+
+.approve-btn {
+  background-color: #10b981;
+  margin-right: 0.5rem;
+}
+
+.approve-btn:hover {
+  background-color: #059669;
+}
+
+.reject-btn {
+  background-color: #ef4444;
+}
+
+.reject-btn:hover {
+  background-color: #dc2626;
+}
+
+/* Loading & No Data */
+.loading, .no-data {
+  text-align: center;
+  margin-top: 2rem;
+  color: #6b7280;
+}
